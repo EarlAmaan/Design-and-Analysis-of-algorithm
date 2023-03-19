@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int main(){
+    ll t;
+    cin>>t;
+    while(t--){
+        ll n,temp,k;
+        cin>>n;
+        vector <ll> a;
+        vector <ll>:: iterator it;
+        for(ll i=0; i<n; i++){
+            cin>>temp;
+            a.push_back(temp);
+        }
+        cin>>k;
+        temp=k-1;
+        while(temp--){
+            it=min_element(a.begin(),a.end());
+            a.erase(it);
+        }
+        it=min_element(a.begin(),a.end());
+        cout<<*it<<endl;
+    }
+}
