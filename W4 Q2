@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+
+int partition(ll arr[], ll start, ll end, ll *comparison, ll *counter)
+{
+ 
+    ll pivot = arr[start];
+    ll count = 0;
+    for (ll i = start + 1; i <= end; i++) {
+        (*comparison)++;
+        if (arr[i] <= pivot)
+            count++;
+    }
+    ll pivotIndex = start + count;
+    swap(arr[pivotIndex], arr[start]);
+    (*counter)++;
+    ll i = start, j = end;
+ 
+    while (i < pivotIndex && j > pivotIndex) {
+ 
+        while (arr[i] <= pivot) {
+            i++;
+            (*comparison)++;
+        }
+ 
+        while (arr[j] > pivot) {
+            j--;
+            (*comparison)++;
+        }
+ 
+        if (i < pivotIndex && j > pivotIndex) {
+            (*comparison)++;
+            swap(arr[i++], arr[j--]);
+            (*counter)++;
+        }
+    }
+ 
+    return pivotIndex;
+}
+
+void quickSort(ll arr[], ll start, ll end, ll *comparison2, ll *count)
+{
+ 
+    if (start >= end)
+        return;
+     ll p = partition(arr, start, end,&(*comparison2),&(*count));
+     quickSort(arr, start, p - 1,&(*comparison2),&(*count));
+     quickSort(arr, p + 1, end,&(*comparison2),&(*count));
+}
+
+int main(){
+    ll t;
+    cin>>t;
+    while(t--){
+        ll n,count=0,comparison=0;
+        cin>>n;
+        ll a[n];
+        for(ll i=0; i<n; i++) cin>>a[i];
+        quickSort(a,0,n-1,&comparison,&count);
+        for(ll i=0; i<n; i++) cout<<a[i]<<" ";
+        cout<<"\nComaprisons= "<<comparison<<endl;
+        cout<<"Swaps= "<<count<<endl;
+    }
+    return 0;
+}
