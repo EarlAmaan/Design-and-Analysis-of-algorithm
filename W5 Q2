@@ -1,0 +1,31 @@
+#include<bits/stdc++.h>
+#define ll long long
+using namespace std;
+int main(){
+    ll t;
+    cin>>t;
+    while(t--){
+        ll n;
+        cin>>n;
+        vector<ll> a;
+        for(ll i=0; i<n; i++){
+            ll temp;
+            cin>>temp;
+            a.push_back(temp);
+        }
+        ll key,c=0;
+        cin>>key;
+        ll low=0;
+        ll high=a.size()-1;
+        sort(a.begin(),a.end());
+        while(low!=high){
+            ll sum=0;
+            sum=sum+a[low]+a[high];
+            if(sum==key) {cout<<a[low]<<" "<<a[high]<<endl; c++; break;}
+            if(sum>key) high--;
+            else low++;
+        }
+        if(c==0) cout<<"No such element exist."<<endl;;
+    }
+return 0;
+}
